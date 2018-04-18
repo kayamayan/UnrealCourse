@@ -4,32 +4,16 @@
 using namespace std;
 
 void PrintIntro();
-string GetGuessAndPrintBack();
+void PlayGame();
+string GetGuess();
+bool AskToPlayAgain();
 
 int main()
 {
 	PrintIntro();
-
-	constexpr int NUMBER_OF_TURN = 5;
-	
-	for (int count = 1; count <= NUMBER_OF_TURN; count++)
-	{
-		GetGuessAndPrintBack();
-		cout << endl;
-	}
-
+	PlayGame();
+	cout << AskToPlayAgain() << endl;
 	return 0;
-}
-
-// get a guess from the player
-string GetGuessAndPrintBack() 
-{
-	cout << "Enter your guess: ";
-	string Guess = "";
-	getline(cin, Guess);
-	// Print the guess
-	cout << "Your guess was: " << Guess << endl;
-	return Guess;
 }
 
 // introduce the game
@@ -40,4 +24,34 @@ void PrintIntro() {
 	cout << " letter isogram I'm thinking of?\n";
 	cout << endl;
 	return;
+}
+
+void PlayGame()
+{
+	constexpr int NUMBER_OF_TURN = 5;
+	for (int count = 1; count <= NUMBER_OF_TURN; count++){
+		string Guess = GetGuess();
+		cout << "Your guess was: " << Guess << endl;
+		cout << endl;
+	}
+}
+
+// get a guess from the player
+string GetGuess() 
+{
+	cout << "Enter your guess: ";
+	string Guess = "";
+	getline(cin, Guess);
+	return Guess;
+}
+
+bool AskToPlayAgain()
+{
+	cout << "Do you want to play again?";
+	string Response = "";
+	getline(cin, Response);
+
+	bool Result;
+	Result = (Response[0] == 'y') || (Response[0] == 'Y');
+	return Result;
 }
