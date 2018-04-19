@@ -19,3 +19,17 @@ Section_02/.vs/BullCowGame/v15/.suo
 *.ilk
 Section_01/.vs/Section_01/v15/.suo
 *.opendb
+*.md
+*.yml
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.log
+*.sln
+*.vcxproj
+*.filters
+*.user
+*.log
+Section_02/BullCowGame/Debug/BullCowGame.log
+*.log
