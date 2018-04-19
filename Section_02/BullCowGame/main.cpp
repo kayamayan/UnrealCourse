@@ -13,6 +13,7 @@ int main()
 	PrintIntro();
 	PlayGame();
 	cout << AskToPlayAgain() << endl;
+    cout << endl;
 	return 0;
 }
 
