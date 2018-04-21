@@ -1,57 +1,63 @@
 #include <iostream>
 #include <string>
-
-using namespace std;
+#include "FBullCowGame.h"
 
 void PrintIntro();
 void PlayGame();
-string GetGuess();
+std::string GetGuess();
 bool AskToPlayAgain();
 
-int main()
+FBullCowGame BCGame;
+
+int main() 
 {
-	PrintIntro();
-	PlayGame();
-	cout << AskToPlayAgain() << endl;
+	bool bPlayAgain = false;
+	do {
+		PrintIntro();
+		PlayGame();
+		bPlayAgain = AskToPlayAgain();
+	} while (bPlayAgain);
+
 	return 0;
 }
 
-// introduce the game
 void PrintIntro() {
 	constexpr int WORD_LENGTH = 9;
-	cout << "Welcome to Bulls and Cows, a fun word game.\n";
-	cout << "Can you guess the " << WORD_LENGTH;
-	cout << " letter isogram I'm thinking of?\n";
-	cout << endl;
+	std::cout << "Welcome to Bulls and Cows, a fun word game.\n";
+	std::cout << "Can you guess the " << WORD_LENGTH;
+	std::cout << " letter isogram i'm thinking off?\n";
+	std::cout << std::endl;
 	return;
 }
 
-void PlayGame()
-{
-	constexpr int NUMBER_OF_TURN = 5;
-	for (int count = 1; count <= NUMBER_OF_TURN; count++){
-		string Guess = GetGuess();
-		cout << "Your guess was: " << Guess << endl;
-		cout << endl;
+void PlayGame() {
+	BCGame.Reset();
+	int MaxTries = BCGame.GetMaxTries();
+
+	for (int count = 1; count <= MaxTries; count++) {
+		std::string Guess = GetGuess(); // TODO make loop checking valid
+		std::cout << "Your guess was : " << Guess << std::endl;
+		std::cout << std::endl;
 	}
+
+	// TODO summarise game
+	return;
 }
 
-// get a guess from the player
-string GetGuess() 
-{
-	cout << "Enter your guess: ";
-	string Guess = "";
-	getline(cin, Guess);
+std::string GetGuess() {
+	int CurrentTry = BCGame.GetCurrentTry();
+	std::string Guess = "";
+
+	std::cout << "Try " << CurrentTry <<  " Enter your guess :";
+	getline(std::cin, Guess);
 	return Guess;
 }
-
-bool AskToPlayAgain()
-{
-	cout << "Do you want to play again?";
-	string Response = "";
-	getline(cin, Response);
+bool AskToPlayAgain() {
+	std::cout << "Do you want to play again?(y/n)";
+	std::string Response = "";
+	getline(std::cin, Response);
 
 	bool Result;
-	Result = (Response[0] == 'y') || (Response[0] == 'Y');
+	Result = (Response[0] == 'Y') || (Response[0] == 'y');
 	return Result;
 }
