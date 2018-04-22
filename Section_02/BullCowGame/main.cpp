@@ -25,7 +25,7 @@ int main()
 		PlayGame();
 		bPlayAgain = AskToPlayAgain();
 	} while (bPlayAgain);
-	std::cout << "Git" << std::endl;
+	
 	return 0;
 }
 
