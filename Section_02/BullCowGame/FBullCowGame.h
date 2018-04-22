@@ -4,10 +4,10 @@
 using FString = std::string;
 using int32 = int;
 
-struct BullCowCount
+struct FBullCowCount
 {
 	int32 Bulls = 0;
-	int32 Cow = 0;
+	int32 Cows = 0;
 };
 
 class FBullCowGame {
@@ -16,15 +16,19 @@ public:
 
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry() const;
+	int32 GetHiddenWordLength() const;
+
 	bool IsGameWon() const;
+	FString GetHiddenWord() const;
 
 	void Reset(); // TODO make a more rich return value
-	bool CheckGuessValidity(FString); // TODO make a more rich return value
+	bool CheckGuessValidity(FString) const; // TODO make a more rich return value
 
-	BullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitGuess(FString);
 
 private:
 	int32 MyCurrentTry;
 	int32 MyMaxTries;
+	FString MyHiddenWord;
 };
 
