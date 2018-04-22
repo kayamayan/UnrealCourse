@@ -14,6 +14,7 @@ void PrintIntro();
 void PlayGame();
 FText GetValidGuess();
 bool AskToPlayAgain();
+void PrintGameSummary();
 
 FBullCowGame BCGame;
 
@@ -41,22 +42,23 @@ void PlayGame() {
 	BCGame.Reset();
 	int32 MaxTries = BCGame.GetMaxTries();
 
-	for (int32 count = 1; count <= MaxTries; count++) {
+	while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries) {
 		FText Guess = GetValidGuess();
 
 		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
 		std::cout << "Bull " << BullCowCount.Bulls;
 		std::cout << ". Cow " << BullCowCount.Cows << "\n\n";
 	}
-	// TODO summarise game
+	
+	PrintGameSummary();
 	return;
 }
 
 FText GetValidGuess() {
 	EGuessStatus Status = EGuessStatus::Invalid_Status;
+	FText Guess = "";
 	do {
 		int32 CurrentTry = BCGame.GetCurrentTry();
-		FText Guess = "";
 
 		std::cout << "Try " << CurrentTry << " Enter your guess :";
 		getline(std::cin, Guess);
@@ -74,10 +76,11 @@ FText GetValidGuess() {
 			std::cout << "Please enter lowercase.\n";
 			break;
 		default:
-			return Guess;
+			break;
 		}
 		std::cout << std::endl;
 	} while (Status != EGuessStatus::OK);
+	return Guess;
 }
 
 bool AskToPlayAgain() {
@@ -88,4 +91,13 @@ bool AskToPlayAgain() {
 	bool Result;
 	Result = (Response[0] == 'Y') || (Response[0] == 'y');
 	return Result;
+}
+
+void PrintGameSummary() {
+	if (BCGame.IsGameWon()) {
+		std::cout << "You won" << std::endl;
+	}
+	else {
+		std::cout << "Bad luck" << std::endl;
+	}
 }

@@ -32,7 +32,7 @@ public:
 	FString GetHiddenWord() const;
 
 	void Reset(); // TODO make a more rich return value
-	EGuessStatus CheckGuessValidity(FString) const; // TODO make a more rich return value
+	EGuessStatus CheckGuessValidity(FString) const;
 
 	FBullCowCount SubmitValidGuess(FString);
 
@@ -40,5 +40,6 @@ private:
 	int32 MyCurrentTry;
 	int32 MyMaxTries;
 	FString MyHiddenWord;
+	bool bGameIsWon;
 };
 
